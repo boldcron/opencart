@@ -151,13 +151,13 @@ class ControllerPaymentCobredireto extends Controller
         $this->load->model('checkout/order');
         switch ($status) {
             case 0: // Pago – transação OK
-                $this->model_checkout_order->confirm($codigopedido, 5);
+                $this->model_checkout_order->confirm($codpedido, 5);
                 break;
             case 1: // Não pago – transação cancelada ou inválida
-                $this->model_checkout_order->confirm($codigopedido, 7);
+                $this->model_checkout_order->confirm($codpedido, 7);
                 break;
             case 2: // Pendente – transação em análise ou não capturada
-                $this->model_checkout_order->confirm($codigopedido, 1);
+                $this->model_checkout_order->confirm($codpedido, 1);
                 break;
         }
     }
