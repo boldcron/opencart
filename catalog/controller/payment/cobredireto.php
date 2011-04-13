@@ -75,8 +75,10 @@ class ControllerPaymentCobredireto extends Controller
         $comment .= $this->config->get('config_address') . "\n\n";
         $comment .= $this->language->get('text_payment') . "\n";
 
+        // Guarda o pedido na base de dados
+        $this->model_checkout_order->confirm($this->session->data['order_id'], 1, $comment);
+        
         /* Aplicando a biblioteca Cobredireto */
-
         require_once ('cbd/pagamento.php');
 
         list($order_info, $cart) = $this->model_payment_cobredireto->getCart();
@@ -147,7 +149,6 @@ class ControllerPaymentCobredireto extends Controller
         }
 
         $order->adicionar($produtos);
-
         $order->pagar();
     }
 
