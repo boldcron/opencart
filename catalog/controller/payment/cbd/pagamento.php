@@ -316,9 +316,9 @@
       $partes = explode('/',$urlHost);$tot = count($partes) - 1;
       $urlHost = str_replace($partes[$tot],'',$urlHost);
       $this->url_recibo   = ((defined('CD_URL_RECIBO')) ? CD_URL_RECIBO  : $urlHost.'recibo.php').'&id='.$this->codpedido;
-      $this->url_erro     = (defined('CD_URL_ERRO'))   ? CD_URL_ERRO    : $urlHost.'erro.php';
-      $this->url_retorno  = (defined('CD_URL_RETORNO'))? CD_URL_RETORNO : $urlHost.'retorno.php';
-      $this->frete        = (defined('CD_FRETE'))      ? CD_FRETE       : 0;
+      $this->url_erro     = (defined('CD_URL_ERRO'))    ? CD_URL_ERRO    : $urlHost.'erro.php';
+      $this->url_retorno  = (defined('CD_URL_RETORNO')) ? CD_URL_RETORNO : $urlHost.'retorno.php';
+      $this->frete        = (defined('CD_FRETE'))       ? CD_FRETE       : 0;
       if ($this->_debug){
           print "Inicializando a classe Pg<br />\n";
           print "Verificando pend&ecirc;ncias<br />\n";
@@ -523,6 +523,15 @@
         $phone_home   = $this->request->createElement('phone_home');
         $area_cod     = $this->request->createElement('area_code',    $dados['tel_casa']['area']);
         $phone_number = $this->request->createElement('phone_number', $dados['tel_casa']['numero']);
+        
+        $address_street     = $this->request->createElement('address_street',           $dados['rua']);
+        $address_street_nr  = $this->request->createElement('address_street_nr',        $dados['numero']);
+        $additional_data    = $this->request->createElement('address_additional_data',  $dados['complemento']);                    
+        $address_comunity   = $this->request->createElement('address_comunity',         $dados['bairro']);
+        $address_city       = $this->request->createElement('address_city',             $dados['cidade']);
+        $address_state      = $this->request->createElement('address_state',            $dados['estado']);
+        $address_country    = $this->request->createElement('address_country',          $dados['pais']);
+        
         $phone_home->appendChild($area_cod);
         $phone_home->appendChild($phone_number);
         $address_zip  = $this->request->createElement('address_zip',  $dados['cep']);
@@ -533,7 +542,16 @@
         $this->$v->appendChild($email      );
         $this->$v->appendChild($document   );
         $this->$v->appendChild($phone_home );
-        $this->$v->appendChild($address_zip);
+        
+        $this->$v->appendChild($address_street);
+        $this->$v->appendChild($address_street_nr);
+        $this->$v->appendChild($additional_data);
+        $this->$v->appendChild($address_comunity);
+        $this->$v->appendChild($address_city);
+        $this->$v->appendChild($address_state);
+        $this->$v->appendChild($address_country);
+        
+        $this->$v->appendChild($address_zip);        
       }
     }
     

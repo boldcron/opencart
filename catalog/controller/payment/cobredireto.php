@@ -88,6 +88,11 @@ class ControllerPaymentCobredireto extends Controller
 
         list($ddd, $telefone) = trataTelefone($order_info['telephone']);
         list($endereco, $numero, $complemento) = trataEndereco("{$order_info['payment_address_1']} {$order_info['payment_address_2']}");
+        
+        $street=explode(',',$order_info['payment_address_1']);            
+        $street = array_slice(array_merge($street, array("","","")),0,3); 
+        list($rua, $numero, $complemento) = $street;      
+
         $data = array (
                 'primeiro_nome' => $order_info['shipping_firstname'],
                 'meio_nome'     => '',
@@ -99,6 +104,13 @@ class ControllerPaymentCobredireto extends Controller
                     'numero'        => $telefone,
                     ),
                 'cep' => $order_info['shipping_postcode'],
+                'rua'           => $rua,
+                'numero'        => $numero,
+                'complemento'   => $complemento,
+                'bairro'        => $order_info['payment_address_2'],
+                'estado'        => $order_info['payment_zone'],
+                'cidade'        => $order_info['payment_city'],
+                'pais'          => $order_info['payment_iso_code_2'],                
                 );
         $order->endereco($data,'ENTREGA');
 
@@ -113,6 +125,13 @@ class ControllerPaymentCobredireto extends Controller
                     'numero'        => $telefone,
                     ),
                 'cep' => $order_info['payment_postcode'],
+                'rua'           => $rua,
+                'numero'        => $numero,
+                'complemento'   => $complemento,
+                'bairro'        => $order_info['payment_address_2'],
+                'estado'        => $order_info['payment_zone'],
+                'cidade'        => $order_info['payment_city'],
+                'pais'          => $order_info['payment_iso_code_2'],                
                 );
         $order->endereco($data,'COBRANCA');
         $order->endereco($data,'CONSUMIDOR');
@@ -151,13 +170,13 @@ class ControllerPaymentCobredireto extends Controller
         $this->load->model('checkout/order');
         switch ($status) {
             case 0: // Pago – transação OK
-                $this->model_checkout_order->confirm($codpedido, 5);
+                $this->model_checkout_order->confirm($codigopedido, 5);
                 break;
             case 1: // Não pago – transação cancelada ou inválida
-                $this->model_checkout_order->confirm($codpedido, 7);
+                $this->model_checkout_order->confirm($codigopedido, 7);
                 break;
             case 2: // Pendente – transação em análise ou não capturada
-                $this->model_checkout_order->confirm($codpedido, 1);
+                $this->model_checkout_order->confirm($codigopedido, 1);
                 break;
         }
     }

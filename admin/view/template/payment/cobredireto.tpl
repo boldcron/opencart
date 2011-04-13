@@ -32,9 +32,12 @@
                 <tr>
                     <td><?php echo $lb_ambiente; ?></td>
                     <td>
+                        <?php $items = array('teste'=>$text_teste,'producao'=>$text_producao);?>
                         <select name="cobredireto_ambiente">
-                            <option value="teste" selected="selected"><?php echo $text_teste; ?></option>
-                            <option value="producao"><?php echo $text_producao; ?></option>
+                            <?php foreach($items as $key => $value): ?>
+                                <?php $selected = substr($key,0,4)==substr($cobredireto_ambiente,0,4)? "selected='selected'" : "";?>
+                                <option value="<?php echo $key ?>" <?php echo $selected ?>><?php echo $value; ?></option>
+                            <?php endforeach; ?>
                         </select>
                     </td>
                 </tr>
