@@ -165,7 +165,7 @@ class ControllerPaymentCobredireto extends Controller
         header("Location: ".HTTPS_SERVER.'index.php?route=checkout/success');
     }
 
-    function capturar($codpedido, $status)
+    function capturar($codigopedido, $status)
     {
         $this->load->model('checkout/order');
         switch ($status) {
