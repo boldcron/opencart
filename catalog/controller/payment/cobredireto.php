@@ -29,7 +29,9 @@ class ControllerPaymentCobredireto extends Controller
     {
         $this->language->load('payment/cobredireto');
         $this->load->model('payment/cobredireto');
-
+        
+        $this->session->data['token'] = array_key_exists('token', $this->session->data) ? $this->session->data['token'] : "";
+        
         $this->data['button_confirm']   = $this->language->get('button_confirm');
         $this->data['button_back']      = $this->language->get('button_back');
 
