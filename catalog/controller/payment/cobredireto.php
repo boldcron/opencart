@@ -29,7 +29,7 @@ class ControllerPaymentCobredireto extends Controller
     {
         $this->language->load('payment/cobredireto');
         $this->load->model('payment/cobredireto');
-        
+
         $this->session->data['token'] = array_key_exists('token', $this->session->data) ? $this->session->data['token'] : "";
         
         $this->data['button_confirm']   = $this->language->get('button_confirm');
@@ -84,6 +84,7 @@ class ControllerPaymentCobredireto extends Controller
         require_once ('cbd/pagamento.php');
 
         list($order_info, $cart) = $this->model_payment_cobredireto->getCart();
+
         $order = new Pg($order_info['order_id']);
 
         $frete = intval(( $this->session->data['shipping_method']['cost']*100));
