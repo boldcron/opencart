@@ -46,7 +46,8 @@ class ModelPaymentCobredireto extends Model
       		foreach ($product['option'] as $option) {
         		$option_data[] = array(
           			'name'   => $option['name'],
-          			'value'  => $option['value'],
+          			'price'  => $option['price'],
+          			'value'  => $option['option_value'],
                     'prefix' => $option['prefix']
         		);
       		}
