@@ -19,7 +19,7 @@ class ModelPaymentCobredireto extends Model
     {
 		$this->load->language('payment/cobredireto');
         $method_data = array( 
-                'code'       => 'cobredireto',
+                'id'         => 'cobredireto',
                 'title'      => $this->language->get('text_title'),
                 'sort_order' => $this->config->get('cobredireto_sort_order')
                 );
