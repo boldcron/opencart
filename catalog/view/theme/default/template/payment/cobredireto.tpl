@@ -19,16 +19,14 @@
 </div>
 
 <script type="text/javascript"><!--
-/*
 $('#finalizar_compra').click(function() {
-  alert(1)
-  $.ajax({ 
-    type: 'GET',
-    url: 'index.php?route=payment/cobredireto/confirm',
-    success: function(t) {
-      location = '<?php echo $continue; ?>'
-    }   
-  });
+    $.ajax({ 
+        type: 'GET',
+        url: 'index.php?route=payment/cobredireto/confirm',
+        success: function(t) {
+            location = '<?php echo $continue; ?>'
+        }   
+    });
 })
-*/
+
 //--></script>
